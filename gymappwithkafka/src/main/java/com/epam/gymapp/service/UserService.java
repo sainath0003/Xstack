@@ -14,4 +14,6 @@ public interface UserService {
 	public boolean changeLogin(UserDtoForPasswordChange userDto);
 
 	public void delete(String userName);
+	
+	public boolean setStatus(UserDto userDto);
 }

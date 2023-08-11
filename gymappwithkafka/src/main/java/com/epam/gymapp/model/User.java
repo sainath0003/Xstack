@@ -14,15 +14,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-@Data
-@Getter
-@Setter
+
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -51,5 +46,61 @@ public class User {
 	private Trainee trainee;
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Trainer trainer;
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	public LocalDate getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(LocalDate createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Trainee getTrainee() {
+		return trainee;
+	}
+	public void setTrainee(Trainee trainee) {
+		this.trainee = trainee;
+	}
+	public Trainer getTrainer() {
+		return trainer;
+	}
+	public void setTrainer(Trainer trainer) {
+		this.trainer = trainer;
+	}
+	
+	
 
 }

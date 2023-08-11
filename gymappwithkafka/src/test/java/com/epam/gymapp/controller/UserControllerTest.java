@@ -2,6 +2,7 @@ package com.epam.gymapp.controller;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -91,4 +92,19 @@ class UserControllerTest {
 		assertNotNull(mvcResult);
 
 	}
+	
+	@Test
+	void testSetStatus() throws Exception {
+		UserDto userDto = new UserDto("sai", "123456");
+
+		Mockito.when(userService.setStatus(any())).thenReturn(true);
+
+		MvcResult mvcResult = mockMvc.perform(get("/gymapp/user/status")
+				.content(new ObjectMapper().writeValueAsString(userDto)).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andReturn();
+		assertNotNull(mvcResult);
+
+	}
+
+
 }

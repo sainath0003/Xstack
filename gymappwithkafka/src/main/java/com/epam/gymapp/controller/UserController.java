@@ -3,6 +3,7 @@ package com.epam.gymapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +46,15 @@ public class UserController {
 			responseEntity = new ResponseEntity<>(HttpStatus.OK);
 		}
 		return responseEntity;
+	}
+
+	@GetMapping("/status")
+	@Operation(summary = "view a Trainee profile")
+	public ResponseEntity<Void> setStauts(@RequestBody UserDto userDto) {
+
+		log.info("Entered  view in TraineeController");
+		userService.setStatus(userDto);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

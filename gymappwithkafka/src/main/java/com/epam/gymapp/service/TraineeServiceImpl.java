@@ -63,6 +63,8 @@ public class TraineeServiceImpl implements TraineeService {
 		}
 
 	}
+	
+	
 
 	public Trainee addTraining(Trainee trainee, Trainer trainer, Training training) {
 		log.info("Entered  addTraining in TraineeServiceImpl");

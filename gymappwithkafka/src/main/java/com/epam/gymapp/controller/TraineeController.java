@@ -37,6 +37,7 @@ public class TraineeController {
 	TraineeService traineeService;
 	@Autowired
 	Notificationservice notificationService;
+	
 	@Autowired
 	KafkaProducer kafkaProducer;
 	@Value("${server.port}")
@@ -49,7 +50,8 @@ public class TraineeController {
 		log.info("Entered  save in TraineeController");
 		UserDto userDto = traineeService.save(traineeDto);
 		kafkaProducer.sendUserDto(userDto);
-		notificationService.sendEmail(userDto.getUserName(), "Registration Sucessfull","Your Login Details are : \n" +userDto.toString());
+		notificationService.sendEmail(userDto.getUserName(), "Registration Sucessfull",
+				"Your Login Details are : \n" + userDto.toString());
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 
 	}
@@ -81,6 +83,7 @@ public class TraineeController {
 		return new ResponseEntity<>(traineeService.view(userName), HttpStatus.OK);
 	}
 
+	
 	@DeleteMapping("/delete")
 	public ResponseEntity<UserDto> delete(@RequestParam String userName) {
 

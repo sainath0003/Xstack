@@ -35,6 +35,15 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	public boolean setStatus(UserDto userDto) {
+		User dbuser = userRepository.findByUserName(userDto.getUserName())
+				.orElseThrow(() -> new UserNotFoundException("User  with given UserName does not Exist"));
+
+		dbuser.setActive(!dbuser.isActive());
+		return dbuser.isActive();
+
+	}
+
 	public User update(User user) {
 
 		log.info("Entered  update in UserServiceImpl");

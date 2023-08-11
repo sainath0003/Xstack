@@ -145,5 +145,27 @@ class UserServiceTest {
 		assertThrows(UserNotFoundException.class, () -> userService.changeLogin(userDto));
 
 	}
+	
+	@Test
+	void testSetStatus() {
+		user.setActive(false);
+		when(userRepository.findByUserName(anyString())).thenReturn(Optional.of(user));
+		assertTrue(userService.setStatus(userDto));
+	}
+	
+	@Test
+	void testSetStatusUnsucessfull() {
+		user.setActive(false);
+		when(userRepository.findByUserName(anyString())).thenReturn(Optional.empty());
+		assertThrows(UserNotFoundException.class, () -> userService.setStatus(userDto));
+
+	}
+	@Test
+	void testSetStatusUnsucessful() {
+		user.setActive(false);
+		when(userRepository.findByUserName(anyString())).thenThrow(UserNotFoundException.class);
+		assertThrows(UserNotFoundException.class, () -> userService.setStatus(userDto));
+
+	}
 
 }
