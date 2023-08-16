@@ -15,7 +15,11 @@
 	<description>project with  Spring Boot Implementation</description>
 	<properties>
 		<java.version>19</java.version>
-  
+
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <maven.compiler.source>1.9</maven.compiler.source>
+  <maven.compiler.target>1.9</maven.compiler.target>
+
 	</properties>
 	
 	<dependencies>
