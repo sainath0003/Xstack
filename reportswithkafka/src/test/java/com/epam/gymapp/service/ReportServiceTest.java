@@ -8,6 +8,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ class ReportServiceTest {
 
 	@Test
 	void testgetReport() {
-		when(reportRepository.findByTrainerUserName(anyString())).thenReturn(List.of(report));
+		when(reportRepository.findByTrainerUserName(anyString())).thenReturn(Optional.of(report));
 		when(kafkaProducer.sendReportList(anyList())).thenReturn(List.of(report));
 		List<Report> result = reportService.getReport("hello");
 		assertEquals(List.of(report), result);

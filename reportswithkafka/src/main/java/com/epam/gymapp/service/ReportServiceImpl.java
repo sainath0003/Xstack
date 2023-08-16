@@ -27,7 +27,13 @@ public class ReportServiceImpl implements ReportService {
 		log.info("Entered  saveReport in ReportServiceImpl");
 		try {
 			log.info(reportDto.toString());
-			return reportRepository.save(new Report(reportDto));
+			Report report = reportRepository.findByTrainerUserName(reportDto.getTrainerUserName()).orElse(null);
+			if (report != null) {
+				report.setTraineeDuration(report.getTraineeDuration() + reportDto.getTraineeDuration());
+			} else {
+				report = new Report(reportDto);
+			}
+			return reportRepository.save(report);
 		} catch (Exception e) {
 			throw new ReportException("Report creation failed,please give correct Input");
 		}
@@ -38,7 +44,10 @@ public class ReportServiceImpl implements ReportService {
 	public List<Report> getReport(String trainerUserName) {
 		log.info("Entered  getReport in ReportServiceImpl");
 		try {
-			return kafkaProducer.sendReportList(reportRepository.findByTrainerUserName(trainerUserName));
+			Report report = reportRepository.findByTrainerUserName(trainerUserName)
+					.orElseThrow(() -> new ReportException("No report Found with given UserName"));
+
+			return kafkaProducer.sendReportList(List.of(report));
 
 		} catch (Exception e) {
 			throw new ReportException("Reports with give UserName are not present");
