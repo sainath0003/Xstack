@@ -18,7 +18,7 @@ public class KafkaTopicConfig {
 	
 	@Bean
 	public NewTopic getUserDto() {
-		return TopicBuilder.name("userDto").build();
+		return TopicBuilder.name("userDto1").build();
 	}
 	@Bean
 	public NewTopic getEmail() {

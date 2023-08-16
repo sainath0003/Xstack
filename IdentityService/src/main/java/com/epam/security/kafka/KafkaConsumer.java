@@ -16,7 +16,7 @@ public class KafkaConsumer {
 	@Autowired
 	private AuthService authService;
 
-	@KafkaListener(topics = "userDto", groupId = "myGroup")
+	@KafkaListener(topics = "userDto1", groupId = "myGroup")
 	public void consumeReportList(UserDto userDto) {
 		
 		log.info("Json Message list received {}", userDto.toString());

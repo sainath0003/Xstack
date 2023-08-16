@@ -30,6 +30,8 @@ public class AuthConfig {
                 .requestMatchers("/auth/register", "/auth/token","/gymapp/trainee/register","/gymapp/trainer/register" , "/auth/validate").permitAll()
                 .and()
                 .build();
+        
+        
     }
 
     @Bean

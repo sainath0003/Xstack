@@ -18,7 +18,7 @@ public class ReportDto {
 	private String trainerUserName;
 	private String trainerFirstName;
 	private String trainerLastName;
-	private Boolean traineeStatus;
+	private Boolean trainerStatus;
 	private Integer traineeDuration;
 	@JsonIgnore
 	private List<TrainingDtoForWrite> trainings;

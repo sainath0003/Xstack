@@ -45,7 +45,7 @@ public class KafkaProducer {
 
 	public void sendUserDto(UserDto userDto) {
 		log.info("Message sent security : {}", userDto.toString());
-		Message<UserDto> message = MessageBuilder.withPayload(userDto).setHeader(KafkaHeaders.TOPIC, "userDto").build();
+		Message<UserDto> message = MessageBuilder.withPayload(userDto).setHeader(KafkaHeaders.TOPIC, "userDto1").build();
 
 		userKafkaTemplate.send(message);
 	}

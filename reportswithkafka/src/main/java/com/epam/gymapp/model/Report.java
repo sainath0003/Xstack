@@ -18,7 +18,7 @@ public class Report {
 	private String trainerUserName;
 	private String trainerFirstName;
 	private String trainerLastName;
-	private Boolean traineeStatus;
+	private Boolean trainerStatus;
 	private Integer traineeDuration;
 
 	private List<TrainingDtoForWrite> trainingsList;
@@ -28,7 +28,7 @@ public class Report {
 		this.trainerUserName = reportDto.getTrainerUserName();
 		this.trainerFirstName = reportDto.getTrainerFirstName();
 		this.trainerLastName = reportDto.getTrainerLastName();
-		this.traineeStatus = reportDto.getTraineeStatus();
+		this.trainerStatus = reportDto.getTrainerStatus();
 		this.traineeDuration = reportDto.getTraineeDuration();
 		this.trainingsList = reportDto.getTrainings();
 	}

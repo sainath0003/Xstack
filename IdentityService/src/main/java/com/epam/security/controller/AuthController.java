@@ -22,7 +22,7 @@ public class AuthController {
     private AuthService service;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+     private AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
     public String addNewUser(@RequestBody UserCredential user) {
@@ -31,16 +31,19 @@ public class AuthController {
 
     @PostMapping("/token")
     public String getToken(@RequestBody AuthRequest authRequest) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        
+    	Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
             return service.generateToken(authRequest.getUsername());
         } else {
-            throw new RuntimeException("invalid access");
+            return "invalid access";
         }
     }
 
     @GetMapping("/validate")
     public String validateToken(@RequestParam("token") String token) {
+    	System.out.println("Token");
+    	System.out.println();
         service.validateToken(token);
         return "Token is valid";
     }
