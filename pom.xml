@@ -15,7 +15,7 @@
 	<description>project with  Spring Boot Implementation</description>
 	<properties>
 		<java.version>19</java.version>
-    <maven.compiler.release>8</maven.compiler.release>
+  
 	</properties>
 	
 	<dependencies>
