@@ -14,7 +14,7 @@
 	<name>JavaProject-1</name>
 	<description>project with  Spring Boot Implementation</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
