@@ -14,12 +14,10 @@
 	<name>JavaProject-1</name>
 	<description>project with  Spring Boot Implementation</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
+    <maven.compiler.release>8</maven.compiler.release>
 	</properties>
-	<properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
