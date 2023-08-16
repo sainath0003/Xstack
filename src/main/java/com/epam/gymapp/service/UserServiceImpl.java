@@ -21,12 +21,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-
-	User user;
 	Random random = new Random();
+	User user;
 
 	public User save(User user) {
-
 		log.info("Entered  save in UserServiceImpl");
 		user.setPassword(random.doubles(6).toString());
 		userRepository.save(user);
@@ -35,20 +33,11 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	public boolean setStatus(UserDto userDto) {
-		User dbuser = userRepository.findByUserName(userDto.getUserName())
-				.orElseThrow(() -> new UserNotFoundException("User  with given UserName does not Exist"));
-
-		dbuser.setActive(!dbuser.isActive());
-		return dbuser.isActive();
-
-	}
-
 	public User update(User user) {
 
 		log.info("Entered  update in UserServiceImpl");
 		User dbUser = userRepository.findByUserName(user.getUserName())
-				.orElseThrow(() -> new UserNotFoundException("User with given UserName  does not Exists "));
+				.orElseThrow(() -> new UserNotFoundException("User with given UserName does not Exists "));
 		user.setUserId(dbUser.getUserId());
 		user.setUserName(dbUser.getUserName());
 		log.info("Exited  update in UserServiceImpl");
@@ -57,16 +46,13 @@ public class UserServiceImpl implements UserService {
 
 	public User view(String userName) {
 		log.info("Entered  view in UserServiceImpl");
-		return userRepository.findByUserName(userName)
-				.orElseThrow(() -> new UserNotFoundException("User with given UserName does  not Exists "));
-
+		return userRepository.findByUserName(userName).orElse(null);
 	}
 
 	public Boolean login(UserDto userDto) {
 		log.info("Entered  login in UserServiceImpl");
 		Boolean result = false;
-		user = userRepository.findByUserName(userDto.getUserName())
-				.orElseThrow(() -> new UserNotFoundException("User with  given UserName does not Exists "));
+		user = userRepository.findByUserName(userDto.getUserName()).orElse(null);
 
 		if (user != null && user.getPassword().equals(userDto.getPassword())) {
 			result = true;
@@ -79,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		log.info("Entered  changeLogin in UserServiceImpl");
 		Boolean result = false;
 		user = userRepository.findByUserName(userDto.getUserName())
-				.orElseThrow(() -> new UserNotFoundException("User  with  given UserName does not Exists  "));
+				.orElseThrow(() -> new UserNotFoundException("User with given UserName does not Exists "));
 
 		if (user != null && user.getPassword().equals(userDto.getOldPassword())) {
 			result = true;

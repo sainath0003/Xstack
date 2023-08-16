@@ -7,7 +7,7 @@ import com.google.common.base.Optional;
 
 public interface TrainingTypeRepository extends JpaRepository<TrainingType, Integer> {
 
-	Optional<TrainingType> findBytrainingTypeName(String trainingTypeName);
+	Optional<TrainingType> findBytrainingTypeName(Object trainingTypeName);
 
 	boolean existsByTrainingTypeName(String trainingTypeName);
 

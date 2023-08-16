@@ -4,15 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.epam.gymapp.dto.TrainingDtoForNewTraining;
-import com.epam.gymapp.service.Notificationservice;
+import com.epam.gymapp.proxy.NotificationService;
 import com.epam.gymapp.service.TrainingService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -22,7 +22,7 @@ public class TrainingController {
 	@Autowired
 	TrainingService trainingService;
 	@Autowired
-	Notificationservice notificationService;
+	NotificationService notificationService;
 
 	@PostMapping("/add")
 	@Operation(summary = "add a new Training")

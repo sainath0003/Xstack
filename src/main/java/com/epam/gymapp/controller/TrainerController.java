@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +18,11 @@ import com.epam.gymapp.dto.TrainerDtoForRead;
 import com.epam.gymapp.dto.TrainingDto;
 import com.epam.gymapp.dto.TrainingDtoForWrite;
 import com.epam.gymapp.dto.UserDto;
-import com.epam.gymapp.kafka.KafkaProducer;
-import com.epam.gymapp.service.Notificationservice;
+import com.epam.gymapp.proxy.NotificationService;
 import com.epam.gymapp.service.TrainerService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -33,18 +32,14 @@ public class TrainerController {
 	@Autowired
 	TrainerService trainerService;
 	@Autowired
-	Notificationservice notificationService;
-	@Autowired
-	KafkaProducer kafkaProducer;
+	NotificationService notificationService;
 
 	@PostMapping("/register")
 	@Operation(summary = "register a Trainer profile")
 	public ResponseEntity<UserDto> save(@RequestBody TrainerDto traineeDto) {
 		log.info("Entered  save in TrainerController");
 		UserDto userDto = trainerService.save(traineeDto);
-		kafkaProducer.sendUserDto(userDto);
-		notificationService.sendEmail(userDto.getUserName(), "Registration Sucessfull",
-				"Your Login Details are : \n" + userDto.toString());
+		notificationService.sendEmail(userDto.getUserName(), "RegisterSucessfull", userDto.toString());
 
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}
@@ -55,7 +50,7 @@ public class TrainerController {
 
 		log.info("Entered  update in TrainerController");
 		trainerDto = trainerService.update(trainerDto);
-		notificationService.sendEmail(trainerDto.getEmail(), "Upadtation Sucessfull", trainerDto.toString());
+		notificationService.sendEmail(trainerDto.getEmail(), "Upadte Sucessfull", trainerDto.toString());
 
 		return new ResponseEntity<>(trainerDto, HttpStatus.OK);
 

@@ -11,6 +11,6 @@ public class EmailDto {
 	private String recipient;
 	private String subject;
 	private String body;
-
+	//private Date sentDate; // = Date.from(Instant.now());
 
 }

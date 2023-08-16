@@ -11,6 +11,7 @@ public class Email {
 	private String recipient;
 	private String subject;
 	private String body;
-
+//	@JsonIgnore
+//	private Date sentDate = Date.from(Instant.now());
 
 }

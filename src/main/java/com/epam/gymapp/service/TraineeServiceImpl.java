@@ -15,6 +15,7 @@ import com.epam.gymapp.dto.TrainingDtoForWrite;
 import com.epam.gymapp.dto.UserDto;
 import com.epam.gymapp.exception.TraineeException;
 import com.epam.gymapp.exception.TraineeNotFoundException;
+import com.epam.gymapp.exception.TrainerNotFoundException;
 import com.epam.gymapp.model.Trainee;
 import com.epam.gymapp.model.Trainer;
 import com.epam.gymapp.model.Training;
@@ -22,10 +23,12 @@ import com.epam.gymapp.model.User;
 import com.epam.gymapp.repository.TraineeRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional
+@NoArgsConstructor
 @Slf4j
 public class TraineeServiceImpl implements TraineeService {
 
@@ -33,6 +36,7 @@ public class TraineeServiceImpl implements TraineeService {
 	UserServiceImpl userService;
 	TraineeRepository traineeRepository;
 	TrainerServiceImpl trainerService;
+
 
 	@Autowired
 	public TraineeServiceImpl(TraineeDtoConverter converter, UserServiceImpl userService,
@@ -63,8 +67,6 @@ public class TraineeServiceImpl implements TraineeService {
 		}
 
 	}
-	
-	
 
 	public Trainee addTraining(Trainee trainee, Trainer trainer, Training training) {
 		log.info("Entered  addTraining in TraineeServiceImpl");
@@ -89,15 +91,20 @@ public class TraineeServiceImpl implements TraineeService {
 		Trainee dbTrainee = traineeRepository.findByUserName(traineeDto.getEmail())
 				.orElseThrow(() -> new TraineeNotFoundException("Trainee  with given UserName does not Exist"));
 
-		trainee.setTraineeId(dbTrainee.getTraineeId());
-		user.setUserId(dbTrainee.getUser().getUserId());
-		trainee.setUser(user);
+		if (dbTrainee != null) {
+			trainee.setTraineeId(dbTrainee.getTraineeId());
+			user.setUserId(dbTrainee.getUser().getUserId());
+			trainee.setUser(user);
 
-		user.setTrainee(trainee);
-		userService.save(user);
-		traineeRepository.save(trainee);
-		log.info("Exited update in TraineeServiceImpl");
-		return traineeDto;
+			user.setTrainee(trainee);
+			userService.save(user);
+			traineeRepository.save(trainee);
+			log.info("Exited update in TraineeServiceImpl");
+			return traineeDto;
+		} else {
+			log.info("Trainee with given UserName does Not Exists ");
+			throw new TraineeException("Trainee with given UserName does not Exist");
+		}
 
 	}
 
@@ -124,14 +131,14 @@ public class TraineeServiceImpl implements TraineeService {
 				.orElseThrow(() -> new TraineeNotFoundException("Trainee with given UserName does not Exists "));
 		List<TrainingDtoForWrite> trainingDtoList = new ArrayList<>();
 		List<Training> trainings = null;
-
-		trainings = trainee.getTrainingList();
-
+		if (trainee != null) {
+			trainings = trainee.getTrainingList();
+		}
+		log.info("Exited  viewTraineeTrainingList in TraineeServiceImpl");
 		if (trainings != null) {
 
 			trainingDtoList = trainings.stream().map(t -> converter.toTrainingDtoForWrite(t)).toList();
 		}
-		log.info("Exited  viewTraineeTrainingList in TraineeServiceImpl");
 		return trainingDtoList;
 	}
 
@@ -148,13 +155,19 @@ public class TraineeServiceImpl implements TraineeService {
 		Trainee trainee = traineeRepository.findByUserName(userName)
 				.orElseThrow(() -> new TraineeNotFoundException("Trainee with given UserName does not Exists "));
 
-		List<Trainer> assignedTrainers = trainee.getTrainersList();
+		if (trainee != null) {
+			List<Trainer> assignedTrainers = trainee.getTrainersList();
 
-		List<Trainer> trainers = trainerService.viewAllTrainers();
-		log.info("Exited  getNotAssignedTrainers in TraineeServiceImpl");
+			List<Trainer> trainers = trainerService.viewAllTrainers();
+			log.info("Exited  getNotAssignedTrainers in TraineeServiceImpl");
 
-		return trainers.stream().filter(t -> !assignedTrainers.contains(t)).map(t -> converter.toTrainerDtoForWrite(t))
-				.toList();
+			return trainers.stream().filter(t -> !assignedTrainers.contains(t))
+					.map(t -> converter.toTrainerDtoForWrite(t)).toList();
+
+		} else {
+			throw new TrainerNotFoundException("Trainee with given UserName does not Exists");
+
+		}
 
 	}
 
@@ -167,8 +180,11 @@ public class TraineeServiceImpl implements TraineeService {
 		List<Trainer> trainers = traineeDto.getTrainers().stream().map(t -> trainerService.getTrainerByUserName(t))
 				.filter(t -> t != null).toList();
 
-		trainee.setTrainersList(trainers);
+		if (trainee != null) {
 
+			trainee.setTrainersList(trainers);
+
+		}
 		log.info("Exited  updateTraineesTrainersList in TraineeServiceImpl");
 		return trainers.stream().map(t -> converter.toTrainerDtoForWrite(t)).toList();
 

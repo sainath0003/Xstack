@@ -11,6 +11,8 @@ import com.epam.gymapp.dto.TrainerDto;
 import com.epam.gymapp.dto.TrainerDtoForRead;
 import com.epam.gymapp.dto.TrainingDtoForWrite;
 import com.epam.gymapp.dto.UserDto;
+import com.epam.gymapp.exception.TraineeException;
+import com.epam.gymapp.exception.TraineeNotFoundException;
 import com.epam.gymapp.exception.TrainerException;
 import com.epam.gymapp.exception.TrainerNotFoundException;
 import com.epam.gymapp.model.Trainee;
@@ -20,10 +22,12 @@ import com.epam.gymapp.model.User;
 import com.epam.gymapp.repository.TrainerRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional
+@NoArgsConstructor
 @Slf4j
 public class TrainerServiceImpl implements TrainerService {
 
@@ -75,22 +79,31 @@ public class TrainerServiceImpl implements TrainerService {
 
 	public TrainerDto update(TrainerDto trainerDto) {
 		log.info("Entered  update in TrainerServiceImpl");
+		try {
+			Trainer trainer = converter.toTrainer(trainerDto);
+			User user = converter.toUser(trainerDto);
 
-		Trainer trainer = converter.toTrainer(trainerDto);
-		User user = converter.toUser(trainerDto);
+			Trainer dbTrainer = trainerRepository.findByUserName(trainerDto.getEmail())
+					.orElseThrow(() -> new TraineeNotFoundException("Trainee  with given UserName does not Exist"));
 
-		Trainer dbTrainer = trainerRepository.findByUserName(trainerDto.getEmail())
-				.orElseThrow(() -> new TrainerNotFoundException("Trainer  with given UserName does not Exist"));
+			if (dbTrainer != null) {
+				trainer.setTrainerId(dbTrainer.getTrainerId());
+				user.setUserId(dbTrainer.getUser().getUserId());
+				trainer.setUser(user);
 
-		trainer.setTrainerId(dbTrainer.getTrainerId());
-		user.setUserId(dbTrainer.getUser().getUserId());
-		trainer.setUser(user);
+				user.setTrainer(trainer);
+				userService.save(user);
+				trainerRepository.save(trainer);
+				log.info("Exited  update in TrainerServiceImpl");
+				return trainerDto;
+			} else {
 
-		user.setTrainer(trainer);
-		userService.save(user);
-		trainerRepository.save(trainer);
-		log.info("Exited  update in TrainerServiceImpl");
-		return trainerDto;
+				throw new TraineeException("Trainee with given UserName does not Exist");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return trainerDto;
+		}
 
 	}
 
@@ -125,7 +138,7 @@ public class TrainerServiceImpl implements TrainerService {
 		List<TrainingDtoForWrite> trainingDtoList = new ArrayList<>();
 		if (trainer != null) {
 			trainingDtoList = trainer.getTrainingsList().stream().map(t -> converter.toTrainingDtoForWrite(t)).toList();
-
+			
 		}
 
 		return trainingDtoList;

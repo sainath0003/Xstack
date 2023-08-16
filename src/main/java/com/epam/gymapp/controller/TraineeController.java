@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +21,11 @@ import com.epam.gymapp.dto.TrainerDtoForWrite;
 import com.epam.gymapp.dto.TrainingDto;
 import com.epam.gymapp.dto.TrainingDtoForWrite;
 import com.epam.gymapp.dto.UserDto;
-import com.epam.gymapp.kafka.KafkaProducer;
-import com.epam.gymapp.service.Notificationservice;
+import com.epam.gymapp.proxy.NotificationService;
 import com.epam.gymapp.service.TraineeService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -36,10 +35,7 @@ public class TraineeController {
 	@Autowired
 	TraineeService traineeService;
 	@Autowired
-	Notificationservice notificationService;
-	
-	@Autowired
-	KafkaProducer kafkaProducer;
+	NotificationService notificationService;
 	@Value("${server.port}")
 	int port;
 
@@ -49,9 +45,7 @@ public class TraineeController {
 
 		log.info("Entered  save in TraineeController");
 		UserDto userDto = traineeService.save(traineeDto);
-		kafkaProducer.sendUserDto(userDto);
-		notificationService.sendEmail(userDto.getUserName(), "Registration Sucessfull",
-				"Your Login Details are : \n" + userDto.toString());
+		notificationService.sendEmail(userDto.getUserName(), "RegisterSucessfull", userDto.toString());
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
 
 	}
@@ -62,7 +56,7 @@ public class TraineeController {
 
 		log.info("Entered  update in TraineeController");
 		traineeDto = traineeService.update(traineeDto);
-		notificationService.sendEmail(traineeDto.getEmail(), "Upadtation Sucessfull", traineeDto.toString());
+		notificationService.sendEmail(traineeDto.getEmail(), "Upadte Sucessfull", traineeDto.toString());
 
 		return new ResponseEntity<>(traineeDto, HttpStatus.OK);
 	}
@@ -83,7 +77,6 @@ public class TraineeController {
 		return new ResponseEntity<>(traineeService.view(userName), HttpStatus.OK);
 	}
 
-	
 	@DeleteMapping("/delete")
 	public ResponseEntity<UserDto> delete(@RequestParam String userName) {
 
