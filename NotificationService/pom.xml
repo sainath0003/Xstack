@@ -96,7 +96,7 @@
 <artifactId>spring-boot-maven-plugin</artifactId>
 <configuration>
 <image>
-<name>${project.groupId}/NotificationService:${project.version}</name>
+<name>${project.groupId}/notificationservice:${project.version}</name>
 </image>
 </configuration>
 <executions>

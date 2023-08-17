@@ -52,7 +52,7 @@
 <artifactId>spring-boot-maven-plugin</artifactId>
 <configuration>
 <image>
-<name>${project.groupId}/EurekaServer:${project.version}</name>
+<name>${project.groupId}/eurekaserver:${project.version}</name>
 </image>
 </configuration>
 <executions>

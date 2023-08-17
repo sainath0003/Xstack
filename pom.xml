@@ -60,7 +60,7 @@
 <artifactId>spring-boot-maven-plugin</artifactId>
 <configuration>
 <image>
-<name>${project.groupId}/GymAPP:${project.version}</name>
+<name>${project.groupId}/gymapp:${project.version}</name>
 </image>
 </configuration>
 <executions>
