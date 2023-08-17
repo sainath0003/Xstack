@@ -9,7 +9,7 @@
 		 <relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>Gym-application</artifactId>
+	<artifactId>Gymapplication</artifactId>
 
 	<properties>
 		<java.version>17</java.version>
@@ -184,7 +184,7 @@
 <artifactId>spring-boot-maven-plugin</artifactId>
 <configuration>
 <image>
-<name>${project.groupId}/Gym-application:${project.version}</name>
+<name>${project.groupId}/Gymapplication:${project.version}</name>
 </image>
 </configuration>
 <executions>

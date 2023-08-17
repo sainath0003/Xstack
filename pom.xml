@@ -15,7 +15,7 @@
 	
 	<modules>
 		
-		<module>Gym-application</module>
+		<module>Gymapplication</module>
 		<module>GatewayServer</module>
 		<module>IdentityService</module>
 		<module>NotificationService</module>
