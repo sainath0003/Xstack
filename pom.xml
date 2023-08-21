@@ -14,14 +14,14 @@
 	<packaging>pom</packaging>
 	
 	<modules>
-		
+		<module>IdentityService</module>
 		<module>Gymapplication</module>
 		<module>GatewayServer</module>
 		
 		<module>NotificationService</module>
 		<module>ReportService</module>
 		<module>EurekaServer</module>
-		<module>IdentityService</module>
+		
 	</modules>
 	
 	<name>GymManagementSystem</name>
