@@ -39,5 +39,7 @@ public class ReportController {
 		return new ResponseEntity<>(reportService.getReport(trainerUserName), HttpStatus.OK);
 	}
 
+	
+
 
 }

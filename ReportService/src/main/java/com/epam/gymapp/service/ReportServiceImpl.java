@@ -54,5 +54,9 @@ public class ReportServiceImpl implements ReportService {
 		}
 
 	}
+	
+	public void delete(String trainerUserName) {
+		reportRepository.deleteByTrainerUserName(trainerUserName);
+	}
 
 }

@@ -7,12 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.epam.gymapp.dto.ReportDto;
 import com.epam.gymapp.dto.TrainingDtoForWrite;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Document(collection = "reports")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Report {
 
 	private String trainerUserName;

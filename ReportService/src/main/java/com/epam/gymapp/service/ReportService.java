@@ -9,4 +9,6 @@ public interface ReportService {
 	public Report saveReport(ReportDto reportDto);
 
 	public List<Report> getReport(String trainerUserName);
+
+	public void delete(String trainerUserName);
 }

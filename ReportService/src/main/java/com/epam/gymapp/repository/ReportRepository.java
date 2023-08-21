@@ -8,4 +8,6 @@ import com.epam.gymapp.model.Report;
 
 public interface ReportRepository extends MongoRepository<Report, String> {
 	Optional<Report> findByTrainerUserName(String trainerUserName);
+	
+	 void deleteByTrainerUserName(String trainerUserName);
 }
