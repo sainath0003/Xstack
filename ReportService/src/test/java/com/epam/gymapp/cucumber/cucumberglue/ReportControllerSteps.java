@@ -60,7 +60,7 @@ public class ReportControllerSteps {
 	@Then("^the response status code should be 200$")
 	public void the_response_status_code_should_be_200() {
 		// assert. the response status code
-		assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue());
+		assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
 	}
 
 	@Then("^the response should contain the report data$")
