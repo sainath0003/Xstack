@@ -1,0 +1,21 @@
+a{
+    color: #8F00FF;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-icon {
+      display: flex;
+    }
+}
+.right-align {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px 0;
+  transition: 0.4s;
+}

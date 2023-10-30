@@ -1,0 +1,10 @@
+/* .content {
+  min-height: calc(
+    100vh - (headerHeight + footerHeight)
+  ); /* Adjust headerHeight and footerHeight as needed 
+} 
+*/
+
+.content{
+    min-height: 100%;
+}

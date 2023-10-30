@@ -1,0 +1,40 @@
+<app-trainee-navbar></app-trainee-navbar>
+<div class="fullscreen-element" style="background: url('data:image/jpeg;base64,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') center/cover no-repeat;">
+<div class="container mt-5" >
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            User Details
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">User's Name:{{trainee.email}}</h5>
+            <p class="card-text">Trainees FirstName:{{trainee.firstName}}</p>
+            <p class="card-text">Trainees LastName:{{trainee.lastName}}</p>
+            <p class="card-text">Location: City, Country</p>
+            <a href="/trainee/updatetrainee" class="btn btn-primary">Edit Profile</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            Actions
+          </div>
+          <div class="card-body ">
+            <a (click)="getTraining()" class="btn btn-secondary mx-2">Get Training Info</a>
+            <a href="/trainee/changepassword" class="btn btn-secondary mx-2">Change Password</a>
+            <!-- <a href="#" class="btn btn-warning">Upload Photo</a> -->
+            <a class="btn btn-danger mx-2" (click)="deleteTrainee()">Delete Account</a>
+          </div>
+
+        </div>
+
+        <div class="p-3 m-5">
+          <a href="/trainee/addtraining" class="btn btn-dark bg-success text-white p-2  mx-2"> <b> Add Training</b></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

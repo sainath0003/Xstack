@@ -1,0 +1,9 @@
+.fullscreen-element {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e0e0e0; /* Set a background color or add other styles */
+    /* Add any additional styles as needed */
+  }

@@ -1,0 +1,21 @@
+<div class="container my-5">
+    <div class="card">
+      <div class="card-header">
+        <h2>My Account</h2>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title" *ngIf="!editMode">View Profile</h3>
+        <h3 class="card-title" *ngIf="editMode">Edit Profile</h3>
+  
+        <div class="form-group" *ngIf="editMode">
+          <!-- Input fields for editing user details (e.g., name, email, etc.) -->
+          <!-- Use Angular forms to handle user input -->
+        </div>
+  
+        <button class="btn btn-primary" *ngIf="editMode" (click)="saveChanges()">Save Changes</button>
+        <button class="btn btn-secondary" *ngIf="editMode" (click)="cancelEdit()">Cancel</button>
+        <button class="btn btn-info" *ngIf="!editMode" (click)="enterEditMode()">Edit Profile</button>
+      </div>
+    </div>
+  </div>
+  

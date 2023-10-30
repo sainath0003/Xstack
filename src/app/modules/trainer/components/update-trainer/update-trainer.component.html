@@ -1,0 +1,35 @@
+<app-trainer-navbar></app-trainer-navbar>
+<div class="container mt-2">
+    <h3>Edit Profile</h3>
+    <form>
+      <div class="mb-3">
+        <label for="firstName" class="form-label">FirstName</label>
+        <input type="text" id="firstName" class="form-control" placeholder="{{trainer.firstName}}" [(ngModel)]="trainer.firstName" name="firstName" required>
+      </div>
+    
+      <div class="mb-3">
+        <label for="lastName" class="form-label">LastName</label>
+        <input type="text" id="lastName" class="form-control" placeholder="{{trainer.lastName}}" [(ngModel)]="trainer.lastName" name="lastName" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="{{trainer.email}}" [(ngModel)]="trainer.email" name="email" required>
+      </div>
+      <!-- <div class="mb-3">
+        <label for="bio" class="form-label">Specialization</label>
+        <input type="text" id="date" class="form-control" placeholder="{{trainer.specialization}}" [(ngModel)]="trainer.specialization" name="date" required>
+      </div> -->
+      <select id="trainer-specialization" name="specialization" [(ngModel)]="trainer.specialization" required style="height: 2.5rem">
+        <option value="" disabled selected>Select Specialization</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Yoga">Yoga</option>
+        <option value="Zumba">Zumba</option>
+        <option value="Stretching">Stretching</option>
+        <option value="Resistance">Resistance</option>
+    </select>
+<br>
+<br>
+      <button type="submit" class="btn btn-primary mb-3" (click)="updatetrainer()">Save Changes</button>
+    </form>
+  </div>
+  

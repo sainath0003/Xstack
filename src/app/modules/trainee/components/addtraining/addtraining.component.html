@@ -1,0 +1,53 @@
+<app-trainee-navbar></app-trainee-navbar>
+<h2 class="d-flex justify-content-center align-items-center">Add Training</h2>
+
+
+<div class="p-3 d-flex justify-content-center align-items-center  ">
+ 
+  <form >
+    <div class="mb-3" >
+      <label class="p-2" for="traineeUserName">Trainee Username : </label>
+      <input type="text" id="traineeUserName" [(ngModel)]="traineeUserName" name="traineeUserName">
+    </div>
+   
+    <div class="mb-3">
+      <label class="p-2" for="trainingName">Training Name : </label>
+      <input type="text" id="trainingName" [(ngModel)]="trainingName" name="trainingName">
+    </div>
+    <!-- <div>
+      <label for="trainingType">Training Type:</label>
+      <input type="text" id="trainingType" [(ngModel)]="trainingType" name="trainingType">
+    </div> -->
+    <div class="mb-3">
+    <label class="p-2"  for="trainingType">Training Type : </label>
+    <select id="trainer-specialization" name="specialization" [(ngModel)]="trainingType" required style="height: 2.5rem" (change)="getTrainers()">
+      <option value="" disabled selected>Select Specialization</option>
+      <option value="Fitness">Fitness</option>
+      <option value="Yoga">Yoga</option>
+      <option value="Zumba">Zumba</option>
+      <option value="Stretching">Stretching</option>
+      <option value="Resistance">Resistance</option>
+  </select>
+</div>
+
+<div class="mb-3">
+  <label class="p-2" for="trainerUserName">Trainer Username : </label>
+  <select id="trainerUserName" [(ngModel)]="trainerUserName" name="trainerUserName" required>
+    <option value="" disabled selected>Select Trainer</option>
+    <option *ngFor="let trainer of trainers" [value]="trainer">{{ trainer }}</option>
+  </select>
+</div>
+
+<!-- <div class="mb-3">
+  <label class="p-2" for="trainingName">Training Date : </label>
+  <input type="text" id="trainingName" [(ngModel)]="trainingDate" name="trainingDate">
+</div> -->
+    <div class="mb-3">
+      <label class="p-2" for="trainingDuration">Training Duration (in days) : </label>
+      <input type="number" id="trainingDuration" [(ngModel)]="trainingDuration" name="trainingDuration">
+    </div>
+    <div class="container mb-5 mx-2  p-3">
+      <button class="btn btn-success btn-rounded" type="submit" (click)="addNewTraining()">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+<app-trainee-navbar></app-trainee-navbar>
+<table class="table table-bordered" style="height: 100%;">
+    <thead>
+      <tr>
+        <th>Trainer User Name</th>
+        <th>Trainee User Name</th>
+        <th>Training Name</th>
+        <th>Training Type Name</th>
+        <!-- <th>Training Date</th> -->
+        <th>Training Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let train of training">
+        <td>{{ train.trainerUserName }}</td>
+        <td>{{ train.traineeUserName }}</td>
+        <td>{{ train.trainingName }}</td>
+        <td>{{ train.trainingTypeName }}</td>
+        <!-- <td>{{ train.trainingDate }}</td> -->
+        <td>{{ train.trainingDuration }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

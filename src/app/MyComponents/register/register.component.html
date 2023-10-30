@@ -1,0 +1,56 @@
+<header><app-navbar></app-navbar>
+</header>
+<body class="text-white p-2 mx-auto " style="background-image: url('https://img.freepik.com/premium-photo/fitness-club-interior-gym-nobody_266732-12682.jpg?size=626&ext=jpg');background-size: cover;">
+   
+        <div class="modal-body text-dark rounded m-2 p-2" id="credentials" style=" display: none;background-color: #00FF00;" >
+           <div class="m-2">
+            <div class="text-white  p-2 m-2 position-absolute top-0 end-0">
+            <button class=" btn btn-rounded text-white bg-dark p-1 rounded" (click)="closeCredentails()">Close</button>
+        </div>
+            <!-- <h4>Credentials</h4> -->
+               <p ><strong>Username:</strong> {{user.userName}}</p>
+               <p><strong>Password:</strong> {{user.password}}</p>
+            </div>
+    </div>
+
+    <div class="container" id="student">
+        <div class="form-container login-form">
+            <h2 ><b>Trainee</b> </h2>  
+            <form id="login-form">
+                <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="FirstName" id="student-firstname" required>
+                <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="LastName" id="student-lastname" required>
+                <input type="text" [(ngModel)]="email" name="email" placeholder="Email" id="student-email" required>
+                <input type="date" placeholder="DateOfBirth" id="dob" name="dob" [(ngModel)]="dob" required>
+                <button type="submit" (click)="registerTrainee()">SignUp</button>
+            </form>
+        </div>
+        <div class="form-container signup-form" id="trainer">
+            <h2><b>Trainer</b> </h2>           
+             <form id="signup-form">
+                <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="First Name" id="trainer-firstname" required>
+                <input type="text"  [(ngModel)]="lastName" name="lastName" placeholder="Last Name" id="trainer-lastname" required>
+                <!-- <input type="text" [(ngModel)]="specialization" name="specialization" placeholder="Specialization" id="trainer-lastname" required> -->
+               
+               
+                <select id="trainer-specialization" name="specialization" [(ngModel)]="specialization" required style="height: 2.5rem">
+                    <option value="" disabled selected>Select Specialization</option>
+                    <option value="Fitness">Fitness</option>
+                    <option value="Yoga">Yoga</option>
+                    <option value="Zumba">Zumba</option>
+                    <option value="Stretching">Stretching</option>
+                    <option value="Resistance">Resistance</option>
+                </select>
+
+                <input type="text" [(ngModel)]="email" name="email" placeholder="Email" id="trainer-email" required>
+                <!-- <input type="password" placeholder="Password" id="signup-password" required> -->
+                <button type="submit" (click)="registerTrainer()">Signup</button>
+            </form>
+        </div>
+        <div class="switch-container">
+            <button id="switch-button " class="m-3 btn btn-success rounded" (click)="switch()">Sigup as {{current}}</button>
+        </div>
+    </div>
+    
+    <script src="register.component.ts"></script>
+</body>
+
